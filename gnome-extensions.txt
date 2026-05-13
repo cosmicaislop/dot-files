@@ -1,0 +1,3 @@
+background-logo@fedorahosted.org
+window-list@gnome-shell-extensions.gcampax.github.com
+user-theme@gnome-shell-extensions.gcampax.github.com
