@@ -1,88 +1,88 @@
 return {
-	  "hashivim/vim-terraform",
+	"hashivim/vim-terraform",
 	{
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-  end,
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-},
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
 	"tpope/vim-fugitive",
 	{
 		"lewis6991/gitsigns.nvim",
-	    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("gitsigns").setup()
-    end,
-  },
-    "nvim-tree/nvim-web-devicons",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
+	"nvim-tree/nvim-web-devicons",
 	{
 		"xiyaowong/transparent.nvim",
 		lazy = false,
 	},
 	{
-    'nvim-lualine/lualine.nvim',
+		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		config = function()
 			require("lualine").setup({
 				options = {
-				theme = "catppuccin",
+					theme = "catppuccin",
 				},
 			})
 		end,
-    dependencies = {
-			'nvim-tree/nvim-web-devicons',
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
 			lazy = true,
-		}
+		},
 	},
 	{
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function ()
-      local configs = require("nvim-treesitter.configs")
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			local configs = require("nvim-treesitter.configs")
 
-      configs.setup({
-          ensure_installed = {
-						"css",
-						"lua",
-						"vim",
-						"vimdoc",
-						"go",
-						"javascript",
-						"html",
-						"hcl",
-						"terraform"
-					},
-          sync_install = false,
-          highlight = { enable = true },
-          indent = { enable = true },
-        })
-    end
- },
+			configs.setup({
+				ensure_installed = {
+					"css",
+					"lua",
+					"vim",
+					"vimdoc",
+					"go",
+					"javascript",
+					"html",
+					"hcl",
+					"terraform",
+				},
+				sync_install = false,
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
+		end,
+	},
 	{
 		"catppuccin/nvim",
 		priority = 1000,
 		opts = {},
-		config = function ()
+		config = function()
 			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
 	{
-    "ibhagwan/fzf-lua",
-    -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      -- calling `setup` is optional for customization
-      require("fzf-lua").setup({})
-    end
-  },
-		{
+		"ibhagwan/fzf-lua",
+		-- optional for icon support
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			-- calling `setup` is optional for customization
+			require("fzf-lua").setup({})
+		end,
+	},
+	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
 			"TmuxNavigateLeft",
@@ -100,51 +100,29 @@ return {
 		},
 	},
 	{
-  "ray-x/go.nvim",
-  dependencies = {  -- optional packages
-    "ray-x/guihua.lua",
-    "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
-  },
-  config = function()
-    require("go").setup()
-  end,
-  event = {"CmdlineEnter"},
-  ft = {"go", 'gomod'},
-  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-},
-{
-  "yanskun/gotests.nvim",
-  ft = "go",
-  config = function()
-    require("gotests").setup()
-  end,
-},
-{
-    "nvim-neorg/neorg",
-		ft = "norg",
-		build = ":Neorg sync-parsers",
-		dependencies = {
-			"luarocks.nvim",
-			"nvim-treesitter"
+		"ray-x/go.nvim",
+		dependencies = { -- optional packages
+			"ray-x/guihua.lua",
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
 		},
-		cmd = "Neorg",
-		opts = {
-			load = {
-				["core.defaults"] = {},
-				["core.concealer"] = {},
-				["core.dirman"] = {
-					config = {
-						workspaces = {
-							notes = "~/notes",
-						},
-					},
-				},
-			},
-		},
-
-    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-    version = "*", -- Pin Neorg to the latest stable release
-    config = true,
-}
+		config = function()
+			require("go").setup()
+		end,
+		event = { "CmdlineEnter" },
+		ft = { "go", "gomod" },
+		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+	},
+	{
+		"yanskun/gotests.nvim",
+		ft = "go",
+		config = function()
+			require("gotests").setup()
+		end,
+	},
+	{
+		"vhyrro/luarocks.nvim",
+		priority = 1000, -- Critical: Must run first
+		config = true,
+	},
 }

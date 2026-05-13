@@ -1,3 +1,5 @@
+[user]
+	email = cosmicaislop@proton.me
 [init]
 	defaultBranch = main
 [alias]

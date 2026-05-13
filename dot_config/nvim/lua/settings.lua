@@ -29,6 +29,5 @@ opt.shiftwidth = 2
 -- number of spaces in tab when editing
 opt.softtabstop = 2
 
-
 vim.cmd([[let g:terraform_fmt_on_save=1]])
 vim.cmd([[let g:terraform_align=1]])
