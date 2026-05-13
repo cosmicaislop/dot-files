@@ -12,6 +12,20 @@ setopt ignore_eof # Stop quitting when I accidentally press ctrl-d
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**'
+# Visual menu you can navigate with arrow keys
+zstyle ':completion:*' menu select
+# Color ls-style colors in file completions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# Group completions by category with headers
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+
+# Cache completions (big speed boost for things like git, dnf)
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# Smarter kill completion — shows process list
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle :compinstall filename '/Users/nihaldayal/.zshrc'
 autoload -Uz compinit
 compinit
