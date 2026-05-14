@@ -1,11 +1,17 @@
 #!/bin/bash
 CHEZMOI_DIR=$(chezmoi source-path)
 
+# error if working tree is dirty
+if ! git -C "$CHEZMOI_DIR" diff --quiet || ! git -C "$CHEZMOI_DIR" diff --cached --quiet; then
+  echo "error: working tree is dirty, commit or stash changes first"
+  exit 1
+fi
+
 dconf dump /org/gnome/shell/extensions/ > "$CHEZMOI_DIR/gnome-extensions.conf"
 dconf dump /org/gnome/desktop/interface/ > "$CHEZMOI_DIR/gnome-interface.conf"
+
 THEME=$(gsettings get org.gnome.shell.extensions.user-theme name | tr -d "'")
 sed -i "s/gnome_shell_theme = .*/gnome_shell_theme = \"$THEME\"/" $(chezmoi source-path)/chezmoi.toml
-gsettings get org.gnome.shell.extensions.user-theme name > "$CHEZMOI_DIR/gnome-user-theme.txt"
 
 cd "$CHEZMOI_DIR"
 git add .
