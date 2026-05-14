@@ -2,3 +2,5 @@
 while read extension; do
   gnome-extensions enable "$extension"
 done < {{ .chezmoi.sourceDir }}/gnome-extensions.txt
+
+gsettings set org.gnome.shell.extensions.user-theme name '{{ .gnome_shell_theme }}'
