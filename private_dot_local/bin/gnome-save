@@ -11,7 +11,7 @@ dconf dump /org/gnome/shell/extensions/ > "$CHEZMOI_DIR/gnome-extensions.conf"
 dconf dump /org/gnome/desktop/interface/ > "$CHEZMOI_DIR/gnome-interface.conf"
 
 THEME=$(gsettings get org.gnome.shell.extensions.user-theme name | tr -d "'")
-sed -i "s/gnome_shell_theme = .*/gnome_shell_theme = \"$THEME\"/" $(chezmoi source-path)/chezmoi.toml
+sed -i "s/user-theme name .*/user-theme name '$THEME'/" "$CHEZMOI_DIR/run_once_restore-gnome-settings.sh.tmpl"
 
 cd "$CHEZMOI_DIR"
 git add .
