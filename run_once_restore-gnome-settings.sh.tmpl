@@ -1,6 +1,8 @@
 #!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
 while read extension; do
   gnome-extensions enable "$extension"
 done < {{ .chezmoi.sourceDir }}/gnome-extensions.txt
 
 gsettings set org.gnome.shell.extensions.user-theme name 'Transparent-Shell-Theme-master'
+{{ end -}}
