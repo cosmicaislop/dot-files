@@ -13,23 +13,15 @@ Managed with [chezmoi](https://chezmoi.io).
 - git
 - gnome settings and themes (Linux only)
 
-## Prerequisites
-
-Install chezmoi:
+## Bootstrap
 
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io)"
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:cosmicaislop/dot-files.git
 ```
 
-## Quick start
-
-```sh
-chezmoi init --apply git@github.com:cosmicaislop/dot-files.git
-```
-
-You'll be prompted: **Is this a work machine?**
+You'll be prompted: **Is this a work/macOS machine?**
 - `y` — macOS; gnome files are skipped
-- `n` — Linux; full setup including gnome theme restore
+- `n` — Linux (Fedora); full setup including gnome theme restore
 
 Dependencies (neovim, tmux, starship, ghostty, alacritty) are installed automatically via `run_once_install-deps.sh`.
 
