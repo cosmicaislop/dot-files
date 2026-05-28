@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+{{ if .work -}}
+brew install neovim tmux starship
+brew install --cask ghostty alacritty
+{{- else -}}
+sudo dnf install -y neovim tmux alacritty
+sh -c "$(curl -sS https://starship.rs/install.sh)" -- --yes
+flatpak install -y flathub com.mitchellh.ghostty
+{{- end }}
