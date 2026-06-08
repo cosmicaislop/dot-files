@@ -32,7 +32,7 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = {
-					theme = "catppuccin",
+					theme = "catppuccin-mocha",
 				},
 			})
 		end,
@@ -46,9 +46,7 @@ return {
 		branch = "main",
 		build = ":TSUpdate",
 		config = function()
-			local configs = require("nvim-treesitter.configs")
-
-			configs.setup({
+			require("nvim-treesitter").setup({
 				ensure_installed = {
 					"css",
 					"lua",
@@ -62,17 +60,15 @@ return {
 					"markdown",
 					"markdown_inline",
 				},
-				sync_install = false,
-				highlight = { enable = true },
-				indent = { enable = true },
 			})
 		end,
 	},
 	{
 		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
-		opts = {},
 		config = function()
+			require("catppuccin").setup({})
 			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
