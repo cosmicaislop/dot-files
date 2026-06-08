@@ -6,6 +6,9 @@ end
 
 local ls = require("luasnip")
 
+-- zen mode
+map("n", "<leader>zm", "<cmd>ZenMode<CR>")
+
 -- fzf files
 map("n", "<C-p>", "<cmd>FzfLua files<CR>")
 -- fzf grep

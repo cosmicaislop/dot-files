@@ -128,4 +128,13 @@ return {
 		priority = 1000, -- Critical: Must run first
 		config = true,
 	},
+	{
+		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
+		opts = {},
+	},
+	{
+		"folke/twilight.nvim",
+		opts = {},
+	},
 }
