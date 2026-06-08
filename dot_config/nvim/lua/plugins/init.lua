@@ -131,6 +131,8 @@ return {
 	},
 	{
 		"folke/twilight.nvim",
-		opts = {},
+		opts = {
+			treesitter = false,
+		},
 	},
 }

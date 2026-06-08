@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# journal.sh — open today's journal entry in neovim
+# Usage: journal [yesterday|YYYY-MM-DD]
+#
+# Set JOURNAL_DIR in your ~/.bashrc or ~/.zshrc to override the default:
+#   export JOURNAL_DIR="$HOME/Documents/journal"
+
+JOURNAL_DIR="${JOURNAL_DIR:-$HOME/journal}"
+mkdir -p "$JOURNAL_DIR"
+
+# Resolve target date
+case "${1:-}" in
+  "")        TARGET=$(date +%Y-%m-%d) ;;
+  yesterday) TARGET=$(date -d yesterday +%Y-%m-%d) ;;
+  *)         TARGET="$1" ;;
+esac
+
+# Validate custom date format
+if [[ ! "$TARGET" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+  echo "Usage: journal [yesterday|YYYY-MM-DD]" >&2
+  exit 1
+fi
+
+YEAR=$(date -d "$TARGET" +%Y)
+MONTH=$(date -d "$TARGET" +%m)
+DAY_DIR="$JOURNAL_DIR/$YEAR/$MONTH"
+ENTRY="$DAY_DIR/$TARGET.md"
+
+mkdir -p "$DAY_DIR"
+
+# Only write template if the file doesn't exist yet
+if [[ ! -f "$ENTRY" ]]; then
+  DOW=$(date -d "$TARGET" +%A)
+  cat > "$ENTRY" << EOF
+# $TARGET · $DOW
+
+---
+
+## How am I feeling right now?
+<!-- A word or two is enough. e.g. tired, hopeful, restless, good -->
+
+
+## What happened today worth remembering?
+
+
+## What's on my mind?
+<!-- Worries, ideas, things unresolved — just get them out -->
+
+
+## One small win today
+
+
+## Anything I want to do differently tomorrow?
+
+
+---
+<!-- Free space — use it however you want -->
+
+EOF
+fi
+
+exec nvim +6 "$ENTRY"
